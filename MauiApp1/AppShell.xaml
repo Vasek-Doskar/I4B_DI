@@ -17,6 +17,12 @@
         Title="Nový Člověk"
         ContentTemplate="{DataTemplate pages:NovyClovek}"
         Route="NovyClovek" />
-    
+
+    <ShellContent
+        Title="Nové Auto"
+        ContentTemplate="{DataTemplate pages:NoveAuto}"
+        Route="NoveAuto" />
+
+
 
 </Shell>

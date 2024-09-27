@@ -13,14 +13,16 @@ namespace MauiApp1
             // Registrace stránek
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<NovyClovek>();
+            builder.Services.AddSingleton<NoveAuto>();
 
 
-            // Registrace Databaze
+            // Registrace Databáze
             builder.Services.AddDbContext<DatabazeEF>();
 
 
             // Registrace Správce
-            builder.Services.AddScoped<IDataManager, DataManager>();
+            builder.Services.AddScoped<ILidiManager, LidiManager>();
+            builder.Services.AddScoped<IAutoManager, AutoManager>();
 
 
             builder

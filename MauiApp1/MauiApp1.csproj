@@ -64,6 +64,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\NoveAuto.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\NovyClovek.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

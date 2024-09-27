@@ -3,51 +3,49 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MauiApp1.Data
 {
-    public class DataManager : IDataManager
+    public class DataManager<TEntity> : IDataManager<TEntity> where TEntity : class
     {
-        private readonly DatabazeEF _db;
+        protected readonly DatabazeEF _db;
+        protected readonly DbSet<TEntity> _dbSet; 
 
         public DataManager(DatabazeEF db)
         {
             _db = db;
+            _dbSet = db.Set<TEntity>();
         }
 
-        public void Delete(Clovek clovek)
+        public void Delete(TEntity entity)
         {
-            if (clovek is not null)
+            if (entity is not null)
             {
-                _db.Remove(clovek);
+                _dbSet.Remove(entity);
                 _db.SaveChanges();
             }
         }
 
-        public void Edit(Clovek clovek)
+        public void Edit(TEntity entity)
         {
-            if (clovek is not null)
+            if (entity is not null)
             {
-                _db.Update(clovek);
+                _dbSet.Update(entity);
                 _db.SaveChanges();
             }
         }
 
-        public IList<Clovek> GetAll() => _db.Lidi.ToList();
+        public IList<TEntity> GetAll() => _dbSet.ToList();
 
-        public Clovek? GetById(int? id)
+        public TEntity? GetById(int? id)
         {
             if(id is not null)
-            {
-                return _db.Lidi
-                    .Include(a => a.Auta)
-                    .FirstOrDefault(a => a.Id == id);
-            }
+                return _dbSet.Find(id);
             return null;
         }
 
-        public void Save(Clovek clovek)
+        public void Save(TEntity entity)
         {
-            if(clovek is not null)
+            if(entity is not null)
             {
-                _db.Add(clovek);
+                _dbSet.Add(entity);
                 _db.SaveChanges();
             }
         }

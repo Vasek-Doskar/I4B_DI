@@ -2,13 +2,13 @@
 
 namespace MauiApp1.Data
 {
-    public interface IDataManager
+    public interface IDataManager<TEntity> where TEntity : class
     {
-        IList<Clovek> GetAll();
-        Clovek? GetById(int? id);
+        IList<TEntity> GetAll();
+        TEntity? GetById(int? id);
 
-        void Save(Clovek clovek);
-        void Edit(Clovek clovek);
-        void Delete(Clovek clovek);
+        void Save(TEntity entity);
+        void Edit(TEntity entity);
+        void Delete(TEntity entity);
     }
 }
