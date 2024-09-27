@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             x:Name="Maina">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <ListView x:Name="Osoby"
+                      WidthRequest="200"
+                      HeightRequest="400"
+                      HorizontalOptions="Center"
+                      BackgroundColor="HotPink"
+                      ItemTapped="Osoby_ItemTapped">                
+            </ListView>
+       
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
