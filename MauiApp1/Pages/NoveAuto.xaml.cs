@@ -5,10 +5,12 @@ namespace MauiApp1.Pages;
 
 public partial class NoveAuto : ContentPage
 {
-	private readonly IDataManager _manager;
-	public NoveAuto(IDataManager manager)
+	private readonly IAutoManager _autoManager;
+	private readonly ILidiManager _lidiManager;
+	public NoveAuto(IAutoManager manager, ILidiManager manager2)
 	{
-        _manager = manager;
+        _autoManager = manager;
+        _lidiManager = manager2;
 
         InitializeComponent();
 		ForFuel.ItemsSource = Enum.GetValues(typeof(Palivo)).Cast<Palivo>() as IList;
@@ -16,7 +18,7 @@ public partial class NoveAuto : ContentPage
         Shell.Current.Navigated += (s, e) =>
         {
             ForOwner.ItemsSource = null;
-            ForOwner.ItemsSource = _manager.GetAll() as IList;
+            ForOwner.ItemsSource = _lidiManager.GetAll() as IList;
         };
 
     }

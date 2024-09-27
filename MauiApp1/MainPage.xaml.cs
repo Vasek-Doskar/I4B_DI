@@ -5,27 +5,29 @@ namespace MauiApp1
 {
     public partial class MainPage : ContentPage
     {
-        private readonly IDataManager _manager;
-        public MainPage(IDataManager manager)
+        private readonly IAutoManager _autoManager;
+        private readonly ILidiManager _lidiManager;
+        public MainPage(IAutoManager autoManager, ILidiManager lidiManager)
         {
-            this._manager = manager;
-            InitializeComponent();
-            Osoby.ItemsSource = _manager.GetAll();
+            _autoManager = autoManager;
+            _lidiManager = lidiManager;
 
+            InitializeComponent();
+            
             Shell.Current.Navigated += (s, e) =>
             {
                 Osoby.ItemsSource = null;
-                Osoby.ItemsSource = _manager.GetAll();
+                Osoby.ItemsSource = _lidiManager.GetAll();
             };
         }
 
         private async void Osoby_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             int hledanyID = ((Clovek)e.Item).Id;
-            Clovek? hledany = _manager.GetById(hledanyID);
+            Clovek? hledany = _lidiManager.GetById(hledanyID);
 
             string auta = "";
-            hledany.Auta.ToList().ForEach(a => auta += $"{a.Znacka}, {a.Model}\n");
+            //hledany.Auta.ToList().ForEach(a => auta += $"{a.Znacka}, {a.Model}\n");
 
             await DisplayAlert($"{hledany.Jmeno}", auta, "OK");
         }

@@ -5,12 +5,11 @@ namespace MauiApp1.Pages;
 
 public partial class NovyClovek : ContentPage
 {
-    private readonly DatabazeEF Db;
-    public NovyClovek(DatabazeEF db)
+    private readonly ILidiManager _manager;
+    public NovyClovek(ILidiManager manager)
 	{
-        Db = db;
-		InitializeComponent();
-       
+        _manager = manager;
+		InitializeComponent();       
 	}
 
     private async void Button_Clicked(object sender, EventArgs e)
@@ -18,8 +17,7 @@ public partial class NovyClovek : ContentPage
         string jmeno = ForName.Text;
         if(jmeno.Length > 3)
         {
-            Db.Lidi.Add(new Clovek() { Jmeno = jmeno });
-            Db.SaveChanges();
+            _manager.Save(new Clovek() { Jmeno = jmeno });
             await DisplayAlert("Uloženo", $"Èlovìk({jmeno}) uložen!", "ok");
             ForName.Text = string.Empty;           
         }        
